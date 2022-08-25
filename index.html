@@ -6,15 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif; 
+        }
+
         button {
-            width: 60px;
-            height: 50px;
+            width: 90px;
+            height: 70px;
         }
         
-        .calculator {
+        .pad, .operators, .container {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 10px;
         }
 
         .display {
@@ -23,35 +28,47 @@
             padding: 10px;
             width: 500px;
         }
+
+        .calculator {
+            display: flex;
+            gap: 20px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="calculator">
+    <div class="container">
         <div class="display">999999999</div>
-        <button class="clear">clear</button>
-        <div class="calculator-row">
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>add</button>
-        </div>
-        <div class="calculator-row">
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>subtract</button>
-        </div>
-        <div class="calculator-row">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>multiply</button>
-        </div>
-        <div class="calculator-row">
-            <button>0</button>
-            <button>.</button>
-            <button>=</button>
-            <button>divide</button>
+        <div class="calculator">
+            <div class="operators">
+                <button>add</button>
+                <button>subtract</button>
+                <button>multiply</button>
+                <button>divide</button>
+                <button class="clear">clear</button>
+            </div>
+            <div class="pad">
+                <div class="calculator-row">
+                    <button>7</button>
+                    <button>8</button>
+                    <button>9</button>
+                </div>
+                <div class="calculator-row">
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                </div>
+                <div class="calculator-row">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                </div>
+                <div class="calculator-row">
+                    <button>0</button>
+                    <button>.</button>
+                    <button>=</button>
+                </div>
+            </div>
         </div>
     </div>
 
