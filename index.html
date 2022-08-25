@@ -5,8 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        button {
+            width: 60px;
+            height: 50px;
+        }
+        
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .display {
+            border-radius: 10px;
+            border: 1px solid black;
+            padding: 10px;
+            width: 500px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="calculator">
+        <div class="display">999999999</div>
+        <button class="clear">clear</button>
+        <div class="calculator-row">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>add</button>
+        </div>
+        <div class="calculator-row">
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>subtract</button>
+        </div>
+        <div class="calculator-row">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>multiply</button>
+        </div>
+        <div class="calculator-row">
+            <button>0</button>
+            <button>.</button>
+            <button>=</button>
+            <button>divide</button>
+        </div>
+    </div>
+
+    <script>
+
+        // // create calculator grid
+        // let calculator = document.createElement('div')
+        // calculator.classList.add('calculator')
+        // calculator.style.cssText = 'display: flex; flex-direction: column; width: 500px; height: 500px; gap: 5px;'
+        // for (let i = 0; i < 3; i++) {
+        //     let row = document.createElement('div')
+        //     row.classList.add('row')
+        //     row.style.cssText = 'display: flex; gap: 5px; flex: 1;'
+        //     for (let j = 0; j < 3; j++) {
+        //         let number = document.createElement('div')
+        //         number.classList.add('number')
+        //         number.style.cssText = 'flex: 1; border: 1px solid black;'
+        //         row.appendChild(number);
+        //     }
+        //     calculator.appendChild(row);
+        // }
+        // document.querySelector('.container').appendChild(calculator)
+    </script>
 </body>
 </html>
