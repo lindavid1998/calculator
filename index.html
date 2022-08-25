@@ -42,13 +42,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="display"> </div>
+        <div class="display"></div>
         <div class="calculator">
             <div class="operators">
-                <button id="add">add</button>
-                <button id="subtract">subtract</button>
-                <button id="multiply">multiply</button>
-                <button id="divide">divide</button>
+                <button class="operator" id="add">add</button>
+                <button class="operator" id="subtract">subtract</button>
+                <button class="operator" id="multiply">multiply</button>
+                <button class="operator" id="divide">divide</button>
                 <button class="clear">clear</button>
             </div>
             <div class="pad">
@@ -79,14 +79,18 @@
     <script>
 
         // Update display when numbers are pressed
-        let numbers = document.querySelectorAll('.pad button');
         let display = document.querySelector('.display');
+        let numbers = document.querySelectorAll('.pad button');
         numbers.forEach(number => number.addEventListener('click', e => {
             let input = e.target.textContent;
             display.textContent += input;
         }));
 
-        
+
+        // Clear display when clear button is pressed
+        let clear = document.querySelector('.clear')
+        clear.addEventListener('click', () => display.textContent = '')
+
 
         // // create calculator grid
         // let calculator = document.createElement('div')
