@@ -80,35 +80,35 @@
 
         // Update display when numbers are pressed
         let display = document.querySelector('.display');
-        let numbers = document.querySelectorAll('.pad button');
+        let numbers = Array.from(document.querySelectorAll('.pad button'));
+        numbers = numbers.filter(number => number.textContent !== '=')
         numbers.forEach(number => number.addEventListener('click', e => {
             let input = e.target.textContent;
             display.textContent += input;
         }));
 
-
         // Clear display when clear button is pressed
         let clear = document.querySelector('.clear')
         clear.addEventListener('click', () => display.textContent = '')
 
+        let operators = {
+            add: '+',
+            subtract: '-',
+            multiply: '*',
+            divide: '/'
+        }
+        let curOperation;
 
-        // // create calculator grid
-        // let calculator = document.createElement('div')
-        // calculator.classList.add('calculator')
-        // calculator.style.cssText = 'display: flex; flex-direction: column; width: 500px; height: 500px; gap: 5px;'
-        // for (let i = 0; i < 3; i++) {
-        //     let row = document.createElement('div')
-        //     row.classList.add('row')
-        //     row.style.cssText = 'display: flex; gap: 5px; flex: 1;'
-        //     for (let j = 0; j < 3; j++) {
-        //         let number = document.createElement('div')
-        //         number.classList.add('number')
-        //         number.style.cssText = 'flex: 1; border: 1px solid black;'
-        //         row.appendChild(number);
-        //     }
-        //     calculator.appendChild(row);
-        // }
-        // document.querySelector('.container').appendChild(calculator)
+        for (let operator in operators) {
+            let button = document.querySelector(`#${operator}`)
+            button.addEventListener('click', () => {
+                display.textContent += ` ${operators[operator]} `
+                curOperation = operators[operator]
+            })
+        }
+
+        // Run calculation when = is pressed
+
     </script>
 </body>
 </html>
