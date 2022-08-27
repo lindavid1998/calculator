@@ -37,7 +37,6 @@
             border: 1px solid #F9FAF8;
             padding: 10px;
             min-height: 20px;
-            /* width: 500px; */
         }
 
         .display, .calculator {
@@ -47,13 +46,12 @@
         .calculator {
             display: flex;
             gap: 20px;     
-            justify-content: space-between;       
+            justify-content: space-between;      
         }
 
         .container {
             align-items: center;
             justify-content: center;
-            /* width: 500px; */
         }
 
     </style>
@@ -63,10 +61,10 @@
         <div class="display"></div>
         <div class="calculator">
             <div class="operators">
-                <button class="operator" id="add">&#43</button>
-                <button class="operator" id="subtract">&#8722</button>
-                <button class="operator" id="multiply">&#215</button>
-                <button class="operator" id="divide">&#247</button>
+                <button class="operator" id="+">&#43</button>
+                <button class="operator" id="-">&#8722</button>
+                <button class="operator" id="*">&#215</button>
+                <button class="operator" id="/">&#247</button>
                 <button class="clear">clear</button>
             </div>
             <div class="pad">
@@ -95,43 +93,62 @@
     </div>
 
     <script>
+        let firstNum;
+        let secondNum;
+        let operator;
+        let overwrite = false;
+        let operatorActive = false;
 
         // Update display when numbers are pressed
+        function displayNums(e) {
+            if (overwrite) {
+                display.textContent = ''
+                overwrite = false
+            }
+            display.textContent += e.target.textContent;
+        };
         let display = document.querySelector('.display');
         let numbers = Array.from(document.querySelectorAll('.pad button'));
-        numbers = numbers.filter(number => number.textContent !== '=')
-        numbers.forEach(number => number.addEventListener('click', e => {
-            let input = e.target.textContent;
-            display.textContent += input;
-        }));
+        numbers = numbers.filter(number => number.textContent !== '=').forEach(number => (
+            number.addEventListener('click', displayNums)
+        ));
 
         // Clear display when clear button is pressed
-        let clear = document.querySelector('.clear')
-        clear.addEventListener('click', () => display.textContent = '')
+        document.querySelector('.clear').addEventListener('click', () => {
+            display.textContent = '';
+            overwrite = false;
+            operatorActive = false;
+            firstNum = null;
+            secondNum = null;
+            operator = null;
+        })
 
-        let operators = {
-            add: '+',
-            subtract: '-',
-            multiply: '*',
-            divide: '/'
+        function applyOperator(e) {
+            // Run calculation if operator is already active
+            if (operatorActive) {
+                secondNum = display.textContent;
+                display.textContent = `${operate(firstNum, secondNum, operator)}`
+            }
+            firstNum = display.textContent;
+            operator = e.target.id;
+            overwrite = true;
+            operatorActive = true;
         }
-        let curOperation;
+        let buttons = document.querySelectorAll('.operator')
+        buttons.forEach(button => button.addEventListener('click', applyOperator))
 
-        for (let operator in operators) {
-            let button = document.querySelector(`#${operator}`)
-            button.addEventListener('click', () => {
-                display.textContent += ` ${operators[operator]} `
-                curOperation = operators[operator]
-            })
-        }
-
-        // Run calculation when = is pressed
+        // Run calculation when = is pressed 
         let equal = document.querySelector('#eq')
         equal.addEventListener('click', () => {
-            let [a, op, b] = display.textContent.split(' ');
-            let result = operate(a, b, op);
-            display.textContent = `${result}`
-        })
+            if (firstNum === null) {
+                return
+            }
+            secondNum = display.textContent
+            display.textContent = `${operate(firstNum, secondNum, operator)}`
+            overwrite = false
+            operatorActive = false
+            firstNum = null;
+        }) 
 
         function add(a, b) {
             return Number(a) + Number(b);
