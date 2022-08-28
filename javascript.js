@@ -34,6 +34,8 @@ document.querySelector('.clear').addEventListener('click', () => {
     buttons.forEach(button => button.classList.remove('active'))
 })
 
+
+// Add function to operators when pressed
 function applyOperator(e) {
     // Run calculation if operator is already active
     if (operatorActive) {
@@ -64,7 +66,7 @@ equal.addEventListener('click', () => {
     firstNum = null;
 }) 
 
-// animate buttons
+// Animate buttons
 function animateButton(e) {
     if (e.type === 'mousedown') {
         e.target.style.backgroundColor = '#388'
@@ -77,7 +79,7 @@ numbers.forEach(number => number.addEventListener('mouseup', animateButton))
 document.querySelector('.clear').addEventListener('mousedown', animateButton)
 document.querySelector('.clear').addEventListener('mouseup', animateButton)
 
-// operations
+// Operations
 function add(a, b) {
     return Number(a) + Number(b);
 }
