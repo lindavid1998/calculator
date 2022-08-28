@@ -25,6 +25,10 @@
             border-radius: 10px;
             font-size: 25px;
         }
+
+        button:hover {
+            background-color: black;
+        }
         
         .pad, .operators, .container {
             display: flex;
@@ -112,7 +116,7 @@
         };
         let display = document.querySelector('.display');
         let numbers = Array.from(document.querySelectorAll('.pad button'));
-        numbers = numbers.filter(number => number.textContent !== '=').forEach(number => (
+        numbers.filter(number => number.textContent !== '=').forEach(number => (
             number.addEventListener('click', displayNums)
         ));
 
@@ -152,6 +156,17 @@
             operatorActive = false
             firstNum = null;
         }) 
+
+        // animate buttons
+        numbers.forEach(number => number.addEventListener('mousedown', e => {
+            console.log('mousedown')
+            e.target.style.backgroundColor = 'red'
+        }))
+
+        numbers.forEach(number => number.addEventListener('mousedown', e => {
+            console.log('mouseup')
+            e.target.style.backgroundColor = ''
+        }))
 
         function add(a, b) {
             return Number(a) + Number(b);
