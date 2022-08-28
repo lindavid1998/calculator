@@ -101,6 +101,9 @@
 
         // Update display when numbers are pressed
         function displayNums(e) {
+            if (display.textContent.includes('.') && e.target.textContent === '.') {
+                return
+            }
             if (overwrite) {
                 display.textContent = ''
                 overwrite = false
