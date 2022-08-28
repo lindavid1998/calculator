@@ -14,6 +14,14 @@ button {
     font-size: 25px;
 }
 
+button:hover {
+    background-color: black;
+}
+
+.pad button:active {
+    background-color: #388;
+}
+
 .pad, .operators, .container {
     display: flex;
     flex-direction: column;

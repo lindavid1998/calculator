@@ -66,19 +66,6 @@ equal.addEventListener('click', () => {
     firstNum = null;
 }) 
 
-// Animate buttons
-function animateButton(e) {
-    if (e.type === 'mousedown') {
-        e.target.style.backgroundColor = '#388'
-    } else {
-        e.target.style.backgroundColor = ''
-    }
-}
-numbers.forEach(number => number.addEventListener('mousedown', animateButton))
-numbers.forEach(number => number.addEventListener('mouseup', animateButton))
-document.querySelector('.clear').addEventListener('mousedown', animateButton)
-document.querySelector('.clear').addEventListener('mouseup', animateButton)
-
 // Operations
 function add(a, b) {
     return Number(a) + Number(b);
