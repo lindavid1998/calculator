@@ -26,9 +26,9 @@
             font-size: 25px;
         }
 
-        button:hover {
+        /* .operator:hover {
             background-color: black;
-        }
+        } */
         
         .pad, .operators, .container {
             display: flex;
@@ -56,6 +56,10 @@
         .container {
             align-items: center;
             justify-content: center;
+        }
+
+        .active {
+            background-color: #388;
         }
 
     </style>
@@ -105,12 +109,14 @@
 
         // Update display when numbers are pressed
         function displayNums(e) {
+            // disable . button if already pressed
             if (display.textContent.includes('.') && e.target.textContent === '.') {
                 return
             }
             if (overwrite) {
                 display.textContent = ''
-                overwrite = false
+                document.getElementById(`${operator}`).classList.remove('active')
+                overwrite = falseq
             }
             display.textContent += e.target.textContent;
         };
@@ -128,6 +134,7 @@
             firstNum = null;
             secondNum = null;
             operator = null;
+            buttons.forEach(button => button.classList.remove('active'))
         })
 
         function applyOperator(e) {
@@ -135,11 +142,14 @@
             if (operatorActive) {
                 secondNum = display.textContent;
                 display.textContent = `${operate(firstNum, secondNum, operator)}`
+                // remove highlight on previous operator
+                document.getElementById(`${operator}`).classList.remove('active')
             }
             firstNum = display.textContent;
             operator = e.target.id;
             overwrite = true;
             operatorActive = true;
+            e.target.classList.add('active')
         }
         let buttons = document.querySelectorAll('.operator')
         buttons.forEach(button => button.addEventListener('click', applyOperator))
@@ -152,21 +162,25 @@
             }
             secondNum = display.textContent
             display.textContent = `${operate(firstNum, secondNum, operator)}`
+            document.getElementById(`${operator}`).classList.remove('active')
             overwrite = false
             operatorActive = false
             firstNum = null;
         }) 
 
         // animate buttons
-        numbers.forEach(number => number.addEventListener('mousedown', e => {
-            console.log('mousedown')
-            e.target.style.backgroundColor = 'red'
-        }))
+        function animateButton(e) {
+            if (e.type === 'mousedown') {
+                e.target.style.backgroundColor = '#388'
+            } else {
+                e.target.style.backgroundColor = ''
+            }
+        }
 
-        numbers.forEach(number => number.addEventListener('mousedown', e => {
-            console.log('mouseup')
-            e.target.style.backgroundColor = ''
-        }))
+        numbers.forEach(number => number.addEventListener('mousedown', animateButton))
+        numbers.forEach(number => number.addEventListener('mouseup', animateButton))
+        document.querySelector('.clear').addEventListener('mousedown', animateButton)
+        document.querySelector('.clear').addEventListener('mouseup', animateButton)
 
         function add(a, b) {
             return Number(a) + Number(b);
